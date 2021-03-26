@@ -274,7 +274,7 @@ data$pers_sudah <- round(data$sudah / data$lulus * 100, 0)
 data$pers_belum <- round(data$belum / data$lulus * 100, 0)
 data$pers_lulus <- round(data$lulus / data$pendaftar * 100, 0)
 data <- data[,c(1:3, 9, 4, 5, 7, 8, 6)]
-names(data) <- c("Fakultas", "Peminat", "Lulus", "% Lulus","Ya", "Tidak", "Ya (%)", "Tidak (%)", "Diterima")
+names(data) <- c("Fakultas", "Peminat", "Lulus", "% Lulus","Sudah", "Belum", "Sudah (%)", "Belum (%)", "Diterima")
 kable(data) %>%
   kable_styling(bootstrap_options = "striped", full_width = F,
                 latex_options = "scale_down") %>%
@@ -303,7 +303,7 @@ data$pers_belum <- round(data$belum / data$lulus * 100, 0)
 data$pers_lulus <- round(data$lulus / data$pendaftar * 100, 0)
 
 data <- data[,c(1:3, 9, 4, 5, 7, 8, 6)]
-names(data) <- c("Fakultas/Program Studi", "Peminat", "Lulus", "% Lulus", "Ya", "Tidak", "Ya (%)", "Tidak (%)", "Diterima")
+names(data) <- c("Fakultas/Program Studi", "Peminat", "Lulus", "% Lulus", "Sudah", "Belum", "Sudah (%)", "Belum (%)", "Diterima")
 
 kable(data, row.names = F) %>%
   kable_styling(bootstrap_options = "striped", full_width = F,
