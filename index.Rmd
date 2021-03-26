@@ -106,7 +106,7 @@ Row
 sudah <- nrow(filter(db, registrasi == "registrasi"))
 valueBox(
   value = paste(format(sudah, big.mark = " "), "", sep = " "),
-  caption = "Registrasi",
+  caption = "Sudah Registrasi",
   icon = "fas fa-thumbs-up",
   color = "green"
 )
@@ -117,7 +117,7 @@ valueBox(
 ```{r}
 valueBox(
   value = paste(format(nrow(db)-sudah, big.mark = " "), "", sep = " "),
-  caption = "Tidak Registrasi",
+  caption = "Belum Registrasi",
   icon = "fas fa-file-upload",
   color = "brown"
 )
@@ -323,7 +323,7 @@ kable(data, row.names = F) %>%
 Camaba Registrasi
 ===
 
-### Berikut adalah daftar nama calon mahasiswa baru Universitas Sultan Ageng Tirtayasa yang melakukan registrasi di admisi.untirta.ac.id  (**gunakan Search untuk pencarian cepat**)
+### Berikut adalah daftar nama calon mahasiswa baru Universitas Sultan Ageng Tirtayasa yang melakukan registrasi di admisi.untirta.ac.id sampai dengan `r format(Sys.time(), "%d %B %Y")` pukul `r format(Sys.time(), "%H:%M")`. (**gunakan Search untuk pencarian cepat**)
 
 ```{r}
 # `r format(Sys.time(), "%d %B %Y")` pukul `r format(Sys.time(), "%X")`
