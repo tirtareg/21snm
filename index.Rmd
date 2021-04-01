@@ -105,7 +105,9 @@ Row
 ```{r}
 sudah <- nrow(filter(db, registrasi == "registrasi"))
 valueBox(
-  value = paste(format(sudah, big.mark = " "), "", sep = " "),
+  value = paste(format(sudah, big.mark = " "), " (", 
+                round(sudah/nrow(db) * 100, 0), "% )",
+                sep = " "),
   caption = "Sudah Registrasi",
   icon = "fas fa-thumbs-up",
   color = "green"
@@ -115,8 +117,11 @@ valueBox(
 ### belum {.value-box}
 
 ```{r}
+belum = nrow(db)-sudah
 valueBox(
-  value = paste(format(nrow(db)-sudah, big.mark = " "), "", sep = " "),
+  value = paste(format(belum, big.mark = " "), " (", 
+                round(belum/nrow(db) * 100, 0), "% )",
+                sep = " "),
   caption = "Belum Registrasi",
   icon = "fas fa-file-upload",
   color = "brown"
