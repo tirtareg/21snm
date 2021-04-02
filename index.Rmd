@@ -342,6 +342,27 @@ DT::datatable(data,
               #filter = "top")
 ```
 
+### Berikut adalah daftar sekolah asal dengan camaba belum registrasi dimulai dari yang terbesar
+
+```{r} 
+data <- db %>%
+  group_by(nama_sklh, kota_sklh, provinsi) %>%
+  mutate(registrasi = replace_na(registrasi, "blm"),
+         registrasi = ifelse(registrasi == "blm", 0, 1)) %>%
+  summarise(lulus = n(),
+            registrasi = sum(registrasi),
+            belum = lulus - registrasi) %>%
+  arrange(-belum)
+
+names(data) <- c("Nama Sekolah", "Alamat Kota/Kab", "Alamat Provinsi", "Lulus SNMPTN", "Sudah Registrasi", "Belum Registrasi")
+
+DT::datatable(data,
+              rownames = F)#,
+              #filter = "top")
+```
+
+
+
 Mahasiswa Baru
 ===
 
