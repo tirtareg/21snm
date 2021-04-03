@@ -328,6 +328,9 @@ kable(data, row.names = F) %>%
 Camaba Registrasi
 ===
 
+row
+---
+
 ### Berikut adalah daftar nama calon mahasiswa baru Universitas Sultan Ageng Tirtayasa yang melakukan registrasi di admisi.untirta.ac.id sampai dengan `r format(Sys.time(), "%d %B %Y")` pukul `r format(Sys.time(), "%H:%M")`. (**gunakan Search untuk pencarian cepat**)
 
 ```{r}
@@ -341,8 +344,10 @@ DT::datatable(data,
               rownames = F)#,
               #filter = "top")
 ```
+row
+---
 
-### Berikut adalah daftar sekolah asal dengan camaba belum registrasi dimulai dari yang terbesar
+### **Berikut adalah daftar sekolah asal dengan camaba BELUM selesai registrasi dimulai dari yang terbesar**
 
 ```{r} 
 data <- db %>%
@@ -352,7 +357,9 @@ data <- db %>%
   summarise(lulus = n(),
             registrasi = sum(registrasi),
             belum = lulus - registrasi) %>%
+  filter(belum > 0) %>%
   arrange(-belum)
+  
 
 names(data) <- c("Nama Sekolah", "Alamat Kota/Kab", "Alamat Provinsi", "Lulus SNMPTN", "Sudah Registrasi", "Belum Registrasi")
 
@@ -361,6 +368,26 @@ DT::datatable(data,
               #filter = "top")
 ```
 
+### **Berikut adalah daftar sekolah asal dengan semua camaba SUDAH selesai registrasi**
+
+```{r}
+data <- db %>%
+  group_by(nama_sklh, kota_sklh, provinsi) %>%
+  mutate(registrasi = replace_na(registrasi, "blm"),
+         registrasi = ifelse(registrasi == "blm", 0, 1)) %>%
+  summarise(lulus = n(),
+            registrasi = sum(registrasi),
+            belum = lulus - registrasi) %>%
+  filter(belum == 0) %>%
+  arrange(-registrasi)
+  
+
+names(data) <- c("Nama Sekolah", "Alamat Kota/Kab", "Alamat Provinsi", "Lulus SNMPTN", "Sudah Registrasi", "Belum Registrasi")
+
+DT::datatable(data,
+              rownames = F)#,
+              #filter = "top")
+```
 
 
 Mahasiswa Baru
