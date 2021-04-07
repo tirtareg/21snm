@@ -108,7 +108,7 @@ valueBox(
   value = paste(format(sudah, big.mark = " "), " (", 
                 round(sudah/nrow(db) * 100, 0), "% )",
                 sep = " "),
-  caption = "Sudah Registrasi",
+  caption = "Registrasi",
   icon = "fas fa-thumbs-up",
   color = "green"
 )
@@ -122,7 +122,7 @@ valueBox(
   value = paste(format(belum, big.mark = " "), " (", 
                 round(belum/nrow(db) * 100, 0), "% )",
                 sep = " "),
-  caption = "Belum Registrasi",
+  caption = "Tidak Registrasi",
   icon = "fas fa-file-upload",
   color = "brown"
 )
@@ -331,7 +331,7 @@ Camaba Registrasi
 row
 ---
 
-### Berikut adalah daftar nama calon mahasiswa baru Universitas Sultan Ageng Tirtayasa yang melakukan registrasi di admisi.untirta.ac.id sampai dengan `r format(Sys.time(), "%d %B %Y")` pukul `r format(Sys.time(), "%H:%M")`. (**gunakan Search untuk pencarian cepat**)
+### Berikut adalah daftar nama calon mahasiswa baru Universitas Sultan Ageng Tirtayasa yang melakukan registrasi ulang di admisi.untirta.ac.id. (**gunakan Search untuk pencarian cepat**)
 
 ```{r}
 # `r format(Sys.time(), "%d %B %Y")` pukul `r format(Sys.time(), "%X")`
