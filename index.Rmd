@@ -6,6 +6,11 @@ output:
     orientation: rows
     vertical_layout: scroll
 ---
+```{css eval=FALSE, include=FALSE}
+.chart-wrapper {
+  overflow-x: scroll;
+}
+```
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
@@ -356,8 +361,9 @@ DT::datatable(data,
               rownames = F)#,
               #filter = "top")
 ```
-row
----
+
+row 
+-----------------------------------------------------
 
 ### **Berikut adalah daftar sekolah asal dengan camaba BELUM selesai registrasi dimulai dari yang terbesar**
 
