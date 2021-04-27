@@ -411,7 +411,10 @@ DT::datatable(data,
 Mahasiswa Baru
 ===
 
-### Berikut adalah daftar nama mahasiswa baru Universitas Sultan Ageng Tirtayasa jalur SNMPTN sampai dengan `r format(Sys.time(), "%d %B %Y")` pukul `r format(Sys.time(), "%H:%M")`. (**gunakan Search untuk pencarian cepat**)
+row
+---
+
+### Berikut adalah daftar nama mahasiswa baru Universitas Sultan Ageng Tirtayasa jalur SNMPTN. (**gunakan Search untuk pencarian cepat**)
 
 ```{r}
 # `r format(Sys.time(), "%d %B %Y")` pukul `r format(Sys.time(), "%X")`
@@ -420,6 +423,32 @@ data <- db %>%
   filter(nim == "diterima") %>%
   select(no_pend, nama, jk, prodi)
 names(data) <- c("No Pendaftaran", "Nama", "Jenis Kelamin", "Program Studi")
+DT::datatable(data,
+              rownames = F)#,
+              #filter = "top")
+```
+
+row
+---
+
+### **Berikut adalah daftar sekolah asal mahasiswa baru Untirta**
+
+```{r}
+data <- db %>%
+  group_by(nama_sklh, kota_sklh, provinsi) %>%
+  mutate(registrasi = replace_na(registrasi, "blm"),
+         registrasi = ifelse(registrasi == "blm", 0, 1),
+         nim = replace_na(nim, "blm"),
+         nim = ifelse(nim == "blm", 0, 1)) %>%
+  summarise(lulus = n(),
+            registrasi = sum(registrasi),
+            belum = lulus - registrasi,
+            mhs = sum(nim)) %>%
+  arrange(-mhs)
+  
+
+names(data) <- c("Nama Sekolah", "Alamat Kota/Kab", "Alamat Provinsi", "Lulus SNMPTN", "Registrasi", "Tidak Registrasi", "Banyaknya Maba")
+
 DT::datatable(data,
               rownames = F)#,
               #filter = "top")
